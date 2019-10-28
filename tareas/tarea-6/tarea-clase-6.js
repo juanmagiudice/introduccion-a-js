@@ -5,6 +5,77 @@ Al hacer click en "calcular", mostrar en un elemento pre-existente la mayor edad
 
 Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuevamente, borrando los inputs ya creados (investigar cómo en MDN).
 */
+ 
+const NumeroDeFamiliares = Number (prompt('Cuanta gente hay en el grupo familiar?'));
+
+for (let i = 1; i <=NumeroDeFamiliares; i++){
+    const form = document.querySelector('form');
+    const label = document.createElement('label')
+    const input = document.createElement('input')
+    input.type = 'number'
+    const edadIntegrante = document.createTextNode('Edad Integrante '  + i + ':')
+    const bajarRenglon = document.createElement('br')
+
+
+    label.appendChild(edadIntegrante)
+    form.appendChild(label)
+    form.appendChild(input)
+    form.appendChild(bajarRenglon)
+    input.class = 'edad'
+}
+
+
+const edadMaxima = Math.max()
+
+const edadMinima = Math.min()
+
+const botonCalcular = document.querySelector('#calcular')
+
+
+
+
+botonCalcular.onclick = function(){
+    const edadesTodos = document.querySelectorAll('.edad');
+   
+    const listaEdades = []
+    for(i = 0; i < edadesTodos.length; i++){
+        listaEdades.push(+edadesTodos[i].value)
+    }
+
+    const edadMaxima = Math.max(...listaEdades)
+    const inputMaximo = document.querySelector('#maximo')
+    inputMaximo.value = edadMaxima
+
+
+    const edadMinima = Math.min(...listaEdades)
+    const inputMinimo = document.querySelector('#minimo')
+    inputMinimo.value = edadMinima
+    
+    
+    const promedioEdad = function(){
+        let edadTotal = 0;
+        for (let i = 0; i < listaEdades.length; i++){
+            edadTotal += listaEdades[i]
+        }
+        return edadTotal / listaEdades.length;
+    }
+    const inputPromedio = document.querySelector('#promedio')
+    inputPromedio.value = promedioEdad();
+}
+
+
+const botonLimpiar = document.querySelector('#limpiar')
+
+botonLimpiar.onclick = function(){
+    const selectInputsABorrar = document.querySelectorAll('.edad');
+    
+    selectInputsABorrar.forEach(function(a){a.remove()})
+}
+
+
+
+
+
 
 
 /*
@@ -14,3 +85,5 @@ Al hacer click en "calcular", mostrar en un elemento pre-existente el mayor sala
 
 Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
 */
+
+
